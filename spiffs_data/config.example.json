@@ -1,0 +1,17 @@
+{
+  "wifi": {
+    "ssid": "YOUR_WIFI_SSID",
+    "password": "YOUR_WPA2_PASSWORD",
+    "hostname": "thermal-server"
+  },
+  "sensor": {
+    "model": "mlx90641",
+    "refresh_rate_hz": 4,
+    "emissivity": 0.95,
+    "auto_start_continuous": true
+  },
+  "time": {
+    "ntp_server": "pool.ntp.org",
+    "timezone": "PST8PDT,M3.2.0,M11.1.0"
+  }
+}
