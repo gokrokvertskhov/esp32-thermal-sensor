@@ -1,0 +1,35 @@
+menu "Thermal Sensor Driver Configuration"
+
+    choice THERMAL_SENSOR_MODEL_CHOICE
+        prompt "Thermal Sensor Chip Support"
+        default THERMAL_SENSOR_RUNTIME
+        help
+            Select which Melexis IR array driver(s) to compile into firmware.
+            "Runtime selectable" compiles both MLX90641 and MLX90640 and lets
+            config.json (sensor.model) select the active chip at boot.
+
+        config THERMAL_SENSOR_RUNTIME
+            bool "Runtime selectable (MLX90641 + MLX90640)"
+
+        config THERMAL_SENSOR_ONLY_MLX90641
+            bool "MLX90641 only (16x12)"
+
+        config THERMAL_SENSOR_ONLY_MLX90640
+            bool "MLX90640 only (32x24)"
+    endchoice
+
+    choice THERMAL_SENSOR_DEFAULT_MODEL
+        prompt "Default Sensor Model"
+        default THERMAL_SENSOR_DEFAULT_MLX90641 if !THERMAL_SENSOR_ONLY_MLX90640
+        default THERMAL_SENSOR_DEFAULT_MLX90640 if THERMAL_SENSOR_ONLY_MLX90640
+
+        config THERMAL_SENSOR_DEFAULT_MLX90641
+            bool "MLX90641 (16x12)"
+            depends on !THERMAL_SENSOR_ONLY_MLX90640
+
+        config THERMAL_SENSOR_DEFAULT_MLX90640
+            bool "MLX90640 (32x24)"
+            depends on !THERMAL_SENSOR_ONLY_MLX90641
+    endchoice
+
+endmenu
