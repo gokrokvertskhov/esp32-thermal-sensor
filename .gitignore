@@ -82,3 +82,7 @@ Desktop.ini
 spiffs_data/config.json
 tests/integration/test_config.json
 
+# IDEs and editors
+.vscode/
+
+
